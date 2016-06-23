@@ -22,6 +22,8 @@ javac -cp acm.jar ./src/BreakoutGame.java
 java -cp .:acm.jar ./src/BreakoutGame.class
 ```
 
+You can soon be able to play the game directly by using `appletviewer`
+
 ## Instructions
 Play as you wish :P
 
@@ -32,3 +34,4 @@ You can modify most of the game settings yourself (Not that there are many thing
 * Update the above section.
 * Add points to keep track of scores.
 * Add eventual build up to the speed of the ball.
+* Fix the html file.
