@@ -21,8 +21,9 @@ All dependencies have been already taken care of.
 javac -cp acm.jar ./src/BreakoutGame.java
 java -cp .:acm.jar ./src/BreakoutGame.class
 ```
+Behold!!!
 
-You can soon be able to play the game directly by using `appletviewer`
+You will soon be able to play the game directly by launching **play.html** which uses `appletviewer`.
 
 ## Instructions
 Play as you wish :P
