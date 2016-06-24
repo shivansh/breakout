@@ -2,25 +2,17 @@ import java.awt.*;
 import acm.graphics.*;
 import acm.program.*;
 
-
 public class BouncingBall extends GraphicsProgram {
 
   private static final int DIAM_BALL = 20;
-
   private static final double GRAVITY = 3;
-
   private static final int DELAY = 50;
-
   private static final double X_START = DIAM_BALL / 2;
   private static final double Y_START = DIAM_BALL /2;
-
   private static final double X_VEL = 10;
-
   private static final double BOUNCE_REDUCE = 0;
-
   private double xVel = X_VEL;
   private double yVel = 0.0;
-
   private GOval ball;
 
   public void run() {
@@ -28,7 +20,7 @@ public class BouncingBall extends GraphicsProgram {
     setup();
     waitForClick();
 
-    //basic algorithm for the game
+    // basic algorithm for the game
     while (ball.getX() < getWidth()) {
       moveBall();
       checkForCollision();
@@ -39,7 +31,7 @@ public class BouncingBall extends GraphicsProgram {
     }
   }
 
-  //setting up the ball in the canvas
+  // setting up the ball in the canvas
   private void setup() {
     ball = new GOval(X_START, Y_START, DIAM_BALL, DIAM_BALL);
     ball.setFilled(true);
@@ -48,16 +40,15 @@ public class BouncingBall extends GraphicsProgram {
     add(ball);
   }
 
-  //y velocity keeps on increasing, x velocity remains constant
+  // y velocity keeps on increasing, x velocity remains constant
   private void moveBall() {
     yVel += GRAVITY;
     ball.move(xVel, yVel);
   }
 
-  //raising the ball by the length as it would have gone down the screen
+  // raising the ball by the length as it would have gone down the screen
   private void checkForCollision() {
-
-    if (ball.getY() > getHeight() - DIAM_BALL) {
+    if(ball.getY() > getHeight() - DIAM_BALL) {
       yVel = - yVel + BOUNCE_REDUCE * yVel;
 
       double diff = ball.getY() - (getHeight() - DIAM_BALL);
@@ -65,7 +56,7 @@ public class BouncingBall extends GraphicsProgram {
     }
   }
 
-  //checking for right screen limit
+  // checking for right screen limit
   private void checkRightCollision() {
     if(ball.getX() > getWidth() - DIAM_BALL) {
       xVel = -xVel;
@@ -75,7 +66,7 @@ public class BouncingBall extends GraphicsProgram {
     }
   }
 
-  //checking for left screen limit
+  // checking for left screen limit
   private void checkLeftCollision() {
     if (ball.getX() <= 0) {
       xVel = -xVel;
@@ -93,5 +84,4 @@ public class BouncingBall extends GraphicsProgram {
       ball.move(0, 2 * diff_4);
     }
   }
-
 }

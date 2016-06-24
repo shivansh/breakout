@@ -6,13 +6,12 @@ import java.awt.Color;
 import java.awt.event.*;
 
 public class BreakoutGame extends GraphicsProgram {
-
-  /* Number of turns */
-  private static final int NTURNS = 2;
+  private static final int NTURNS = 2;    /* Number of turns */
 
   /* Environment settings */
-  public static final int PADDLE_WIDTH = 100;
-  public static final int PADDLE_HEIGHT = 10;
+  public static final int  PADDLE_WIDTH = 100;
+  public static final int  PADDLE_HEIGHT = 10;
+  public static int        brick_counter = 100;
   private static final int PADDLE_Y_OFFSET = 30;
   private static final int NBRICKS_PER_ROW = 10;
   private static final int NBRICKS_ROWS = 10;
@@ -20,7 +19,6 @@ public class BreakoutGame extends GraphicsProgram {
   private static final int BRICK_WIDTH = 	(800 - (NBRICKS_PER_ROW - 1) * BRICK_SEP) / NBRICKS_PER_ROW;
   private static final int BRICK_HEIGHT = 8;
   private static final int DIAM_BALL = 10;
-  public static int brick_counter = 100;
 
   private int COUNT_X = 0;
   private int COUNT_Y = 0;
@@ -34,10 +32,12 @@ public class BreakoutGame extends GraphicsProgram {
 
   /* Main loop */
   public void run() {
-    for (int i = 0; i < NTURNS; i++) {
+    for(int i = 0; i < NTURNS; i++) {
+      /* Do the initial setup */
       setup();
       waitForClick();
       playGame();
+
       if(brick_counter == 0) {
         ball.setVisible(false);
         printWinner();
@@ -47,7 +47,7 @@ public class BreakoutGame extends GraphicsProgram {
         removeAll();
       }
     }
-    if ( brick_counter > 0) {
+    if (brick_counter > 0) {
       endGame();
     }
   }
@@ -64,7 +64,6 @@ public class BreakoutGame extends GraphicsProgram {
     while(true) {
       moveBall();
       if(ball.getY() >= getHeight()) {
-
         break;
       }
     }
@@ -74,19 +73,19 @@ public class BreakoutGame extends GraphicsProgram {
     yVel = 4.0;
     xVel = rgen.nextDouble(1.0, 3.0);
     if(rgen.nextBoolean(0.5)) {
-      xVel = - xVel;
+      xVel = -xVel;
     }
   }
 
   public void setup() {
     /* Add the bricks */
-    for (int i = 1; i <= NBRICKS_ROWS; i++) {
-      for (int j = 1; j <= NBRICKS_PER_ROW +1; j++) {
+    for(int i = 1; i <= NBRICKS_ROWS; i++) {
+      for(int j = 1; j <= NBRICKS_PER_ROW + 1; j++) {
         rect = new GRect(COUNT_X + 2, 80 + COUNT_Y, BRICK_WIDTH, BRICK_HEIGHT);
         rect.setFilled(true);
         rect.setFillColor(rgen.nextColor());
         add(rect);
-        COUNT_X+= BRICK_WIDTH + BRICK_SEP;
+        COUNT_X += BRICK_WIDTH + BRICK_SEP;
       }
       COUNT_X = 0;
       COUNT_Y += BRICK_HEIGHT + BRICK_SEP;
@@ -109,7 +108,9 @@ public class BreakoutGame extends GraphicsProgram {
   /* y velocity keeps on increasing, x velocity remains constant */
   private void moveBall() {
     ball.move(xVel, yVel);
-    if ((ball.getX() - xVel <= 0 && xVel < 0 )|| (ball.getX() + xVel >= (getWidth() - DIAM_BALL) && xVel>0)) {
+    if ((ball.getX() - xVel <= 0 && xVel < 0 ) ||
+        (ball.getX() + xVel >= (getWidth() - DIAM_BALL) &&
+         xVel>0)) {
       xVel = -xVel;
     }
 
@@ -119,36 +120,38 @@ public class BreakoutGame extends GraphicsProgram {
 
     if (ball.getY() > getWidth() - DIAM_BALL) {
       removeAll();
-
     }
 
     GObject collider = getCollidingObject();
     if ( collider == paddle) {
-      if(ball.getY() >= getHeight() - PADDLE_Y_OFFSET - PADDLE_HEIGHT - DIAM_BALL && ball.getY() < getHeight() - PADDLE_Y_OFFSET - PADDLE_HEIGHT - DIAM_BALL + 4) {
-        yVel = - yVel;
+      if((ball.getY() >= getHeight() - PADDLE_Y_OFFSET
+                         - PADDLE_HEIGHT - DIAM_BALL ) &&
+          (ball.getY() < getHeight() - PADDLE_Y_OFFSET
+                         - PADDLE_HEIGHT - DIAM_BALL + 4 )) {
+        yVel = -yVel;
       }
     }
 
     else if(collider != null) {
       remove(collider);
-      brick_counter -=1;
-      yVel = - yVel;
+      brick_counter -= 1;
+      yVel = -yVel;
     }
     pause(DELAY);
   }
 
-  /* TODO: Fix this function */
+  /* TODO Fix this function */
   private void endGame() {
-    GLabel gameOver = new GLabel ("Game Over", getWidth()/2, getHeight()/2);
+    GLabel gameOver = new GLabel("Game Over", getWidth()/2, getHeight()/2);
     gameOver.setFont("Comic Sans MS-36");
     gameOver.move(-gameOver.getWidth()/2, -gameOver.getHeight());
     gameOver.setColor(Color.RED);
     add (gameOver);
   }
 
-  /* TODO: Fix this function */
+  /* TODO Fix this function */
   private void printWinner() {
-    GLabel Winner = new GLabel ("Winner!!", getWidth()/2, getHeight()/2);
+    GLabel Winner = new GLabel("Winner!!", getWidth()/2, getHeight()/2);
     Winner.setFont("Comic Sans MS-36");
     Winner.move(-Winner.getWidth()/2, -Winner.getHeight());
     Winner.setColor(Color.RED);
@@ -159,7 +162,7 @@ public class BreakoutGame extends GraphicsProgram {
     if((getElementAt(ball.getX(), ball.getY())) != null) {
       return getElementAt(ball.getX(), ball.getY());
     }
-    else if (getElementAt( (ball.getX() + DIAM_BALL), ball.getY()) != null ){
+    else if(getElementAt((ball.getX() + DIAM_BALL), ball.getY()) != null ){
       return getElementAt(ball.getX() + DIAM_BALL, ball.getY());
     }
     else if(getElementAt(ball.getX(), (ball.getY() + DIAM_BALL)) != null ){
@@ -168,8 +171,7 @@ public class BreakoutGame extends GraphicsProgram {
     else if(getElementAt((ball.getX() + DIAM_BALL), (ball.getY() + DIAM_BALL)) != null ){
       return getElementAt(ball.getX() + DIAM_BALL, ball.getY() + DIAM_BALL);
     }
-
-    else{
+    else {
       return null;
     }
   }
@@ -181,5 +183,4 @@ public class BreakoutGame extends GraphicsProgram {
   }
 
   private RandomGenerator rgen = RandomGenerator.getInstance();
-
 }
