@@ -1,7 +1,7 @@
-#breakout
+# breakout
 
-The first game, the one where the journey of Java exploration began :smile: <br>
-This is a small and simple game made in the freshman days when I started programming (and was enjoying OOP).
+The first game, the one where the journey of Java exploration and everything else began :smile: <br>
+This is a small and simple game made in the freshman days when I started programming (and was starting to appreciate OOP).
 
 ```
           _|_|_|                                  _|                              _|
@@ -11,8 +11,9 @@ This is a small and simple game made in the freshman days when I started program
           _|_|_|    _|          _|_|_|    _|_|_|  _|    _|    _|_|      _|_|_|      _|_|
 ```
 
+---
+
 ## System Requirements
-* Your favourite IDE (say Eclipse or NetBens)
 * Java(TM) SE Runtime Environment
 
 ## How to play ?
