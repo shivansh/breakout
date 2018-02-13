@@ -11,6 +11,13 @@ This is a small and simple game made in the freshman days when I started program
           _|_|_|    _|          _|_|_|    _|_|_|  _|    _|    _|_|      _|_|_|      _|_|
 ```
 
+
+And behold a gem from 3 years back, which I accidentally discovered (those days when I was on Windows Vista!!) -
+
+<p align="center">
+  <img alt="A gem from the past" src="breakout.gif">
+</p>
+
 ---
 
 ## System Requirements
